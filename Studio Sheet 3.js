@@ -43,6 +43,16 @@ function fast_exp(b, n) {
     return fast_exp_iter(1, b, n);
 }
 
+function fast_expt(b, n) {
+    return n === 1
+        ? b
+        : n < 0
+            ? 1 / fast_expt(-n)
+            : n % 2 === 0
+                ? fast_expt(b * b, n / 2)
+                : b * fast_expt(b, n - 1);
+}
+
 /* 4.
     Both are recursive processes
     O(n) time and space
