@@ -24,9 +24,31 @@ show(moony_2(5));
 
 show(moony(5));
 
+function fast_exp_rec(b, n) {
+    return n === 1
+        ? b
+        : n % 2 === 0
+            ? fast_exp_rec(b * b, n / 2)
+            : b * fast_exp_rec(b, n - 1);
+}
+
+function fast_exp(b, n) {
+    function fast_exp_iter(res, b, n) {
+        return n === 0
+            ? res
+            : n % 2 === 0
+                ? fast_exp_iter(res, b * b, n / 2)
+                : b * fast_exp_iter(res * b, b, n - 1);
+    }
+    return fast_exp_iter(1, b, n);
+}
+
 /* 4.
     Both are recursive processes
     O(n) time and space
     No. of deferred operations
     Assume that beside_frac, stack_frac, takes O(1) time
 */
+
+display(fast_exp_rec(7, 3));
+display(fast_exp(3, 17));
