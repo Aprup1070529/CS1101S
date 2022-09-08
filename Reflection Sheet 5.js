@@ -1,9 +1,5 @@
 function flatten_list(lst) {
-    return is_null(lst)
-        ? list()
-        : is_list(head(lst))
-        ? append(flatten_list(head(lst)), flatten_list(tail(lst)))
-        : append(list(head(lst)), flatten_list(tail(lst)));
+    return accumulate(append, null, lst);
 }
 
 const LoL = list(list(1, 2), list(3, 4, 5, 6), null, list(7, 8, 9));
