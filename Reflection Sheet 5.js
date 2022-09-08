@@ -8,7 +8,7 @@ flatten_list(LoL);
 function tree_sum(tree) {
     return is_null(tree)
         ? 0
-        : is_list(head(tree)) //is_pair(head(tree)) is more efficient
+        : is_list(head(tree)) // is_pair(head(tree)) is more efficient
         ? tree_sum(head(tree)) + tree_sum(tail(tree))
         : head(tree) + tree_sum(tail(tree));
 }
