@@ -17,7 +17,8 @@ const my_tree = list(1, list(2, list(3, 4), 5), list(6, 7));
 tree_sum(my_tree);
 
 function accumulate_tree(f, op, initial, tree) {
-    return accumulate((x, y) => op(f(x), y) , initial, tree);
+    return accumulate((x, y) => !is_pair(x) ? op(f(x), y) : op(head(x), y) , 
+                                                                initial, tree);
 }
 
 const LoN = list(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
