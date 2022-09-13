@@ -63,17 +63,7 @@ subsets(list(1, 2, 3));
 // list(1,2), list(1,3), list(2,3), list(1,2,3))
 
 function permutations(a) {
-    function insertion(x, lst) {
-        const len = list_ref(lst);
-        function insertion_position(x, n, lst) {
-            return n === 0
-                ? append(head(lst), x, tail(lst))
-                : append(head(lst), insertion_position(x, n - 1, tail(lst)));
-        }
-        const pos = enum_list(0, len);
-        return accumulate((h, t) => pair(h, t), list(null), 
-                                map(p => insertion_position(x, p, lst), pos));
-    }
+    
 }
 
 permutations(list(1, 2, 3));
