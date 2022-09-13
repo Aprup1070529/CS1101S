@@ -27,7 +27,7 @@ function makeup_amount(x, coins) {
         // Combinations that do not use the head coin for the remaining amount.
         const combi_B = makeup_amount(x - head(coins), tail(coins));
         // Combinations that use the head coin.
-        const combi_C = makeup_amount(x - head(coins), coins));
+        const combi_C = makeup_amount(x - head(coins), coins);
         return append(combi_A, combi_C);
     }
 }
