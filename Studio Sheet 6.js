@@ -4,6 +4,7 @@ function my_map(f, xs) {
 
 // my_map(x => x + 1, list(1, 2, 3));
 
+/*
 function remove_duplicates(lst) {
     return is_null(lst)
         ? null
@@ -16,6 +17,7 @@ remove_duplicates(list(1, 2, 3, 4, 4, 3, 2, 1, 2));
 
 remove_duplicates(list("a", "x", "b", "c", "c", "b", "d"));
 // Result: list("a", "x", "b", "c", "d")
+*/
 
 function makeup_amount(x, coins) {
     if (x === 0) {
@@ -58,8 +60,22 @@ function subsets(xs) {
 
 subsets(list(1, 2, 3));
 // Result: list(list(), list(1), list(2), list(3),
-//                              list(1,2), list(1,3), list(2,3), list(1,2,3))
+// list(1,2), list(1,3), list(2,3), list(1,2,3))
 
 function permutations(a) {
-       
+    function insertion(x, lst) {
+        const len = list_ref(lst);
+        function insertion_position(x, n, lst) {
+            return n === 0
+                ? append(head(lst), x, tail(lst))
+                : append(head(lst), insertion_position(x, n - 1, tail(lst)));
+        }
+        const pos = enum_list(0, len);
+        return accumulate((h, t) => pair(h, t), list(null), 
+                                map(p => insertion_position(x, p, lst), pos));
+    }
 }
+
+permutations(list(1, 2, 3));
+// Result: list(list(1,2,3), list(1,3,2), 
+// list(2,1,3), list(2,3,1), list(3,1,2), list(3,2,1))
