@@ -23,5 +23,15 @@ insertion_sort_cmp(xs, (x, y) => x > y);
 insertion_sort_cmp(xs, (x, y) => false);
 // Result: list(7, 2, 4, 6, 9, 1, 5, 8, 3, 6)
 
-// insertion_sort_cmp(xs, ???);
+function compute(x , y) {
+    const even = n => n % 2 === 0;
+    return even(x) && !even(y)
+        ? true
+        : !even(x) && even(y)
+        ? false
+        : even(x) && even(y)
+        ? x <= y
+        : x >= y;
+}
+insertion_sort_cmp(xs, compute);
 // Result: list(2, 4, 6, 6, 8, 9, 7, 5, 3, 1)
