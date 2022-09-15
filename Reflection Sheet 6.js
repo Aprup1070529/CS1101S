@@ -12,14 +12,16 @@ function insertion_sort_cmp(xs, cmp) {
         : insert_cmp(head(xs), insertion_sort_cmp(tail(xs), cmp), cmp);
 }
 
-insertion_sort_cmp(xs, (x, y) => x <= y);
+const xs = list(6, 3, 8, 5, 1, 9, 6, 4, 2, 7);
+
+insertion_sort_cmp(xs, (x, y) => x < y);
 // Result: list(1, 2, 3, 4, 5, 6, 6, 7, 8, 9)
 
-insertion_sort_cmp(xs, (x, y) => x >= y);
+insertion_sort_cmp(xs, (x, y) => x > y);
 // Result: list(9, 8, 7, 6, 6, 5, 4, 3, 2, 1)
 
-insertion_sort_cmp(xs, ???);
+insertion_sort_cmp(xs, (x, y) => false);
 // Result: list(7, 2, 4, 6, 9, 1, 5, 8, 3, 6)
 
-insertion_sort_cmp(xs, ???);
+// insertion_sort_cmp(xs, ???);
 // Result: list(2, 4, 6, 6, 8, 9, 7, 5, 3, 1)
