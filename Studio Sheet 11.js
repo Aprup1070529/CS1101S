@@ -103,7 +103,7 @@ function stream_interweave(s1, s2) {
     return weave(s1, s2, 1);
 }
 
-function stream_pairs3(s) {
+function stream_pairs(s) {
     return is_null(s)
         ? null
         : stream_interweave(
@@ -112,4 +112,4 @@ function stream_pairs3(s) {
 }
 
 const integers = integers_from(1);
-const s3 = stream_pairs3(integers);
+const s = stream_pairs(integers);
