@@ -108,7 +108,7 @@ function stream_pairs(s) {
         ? null
         : stream_interweave(
             stream_map(sn => pair(head(s), sn), stream_tail(s)),
-            () => stream_pairs3(stream_tail(s)));
+            () => stream_pairs(stream_tail(s)));
 }
 
 const integers = integers_from(1);
