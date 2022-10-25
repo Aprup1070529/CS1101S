@@ -42,4 +42,8 @@ function fun_to_series(fun) {
 
 const alt_ones = pair(1, () => negate_series(alt_ones));
 
-const zeros = add_streams(alt_ones, stream_tail(alt_ones));
+const zeros = add_series(alt_ones, stream_tail(alt_ones));
+
+const S1 = fun_to_series(x => 1);
+
+const S2 = fun_to_series(x => x + 1);
