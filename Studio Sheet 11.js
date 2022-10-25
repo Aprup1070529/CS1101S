@@ -48,6 +48,46 @@ const S1 = fun_to_series(x => 1);
 
 const S2 = fun_to_series(x => x + 1);
 
+function multiply_series(s1, s2) {
+    const memo1 = [];
+    const memo2 = [];
+    
+    function get_power_term(n) {
+        let sum = 0;
+        let p1 = 0;
+        let p2 = 0;
+        for(let i = 0; i < n; i = i + 1) {
+            if(memo1[i] === undefined) {
+                memo1[i] = stream_ref(s1, i);
+            }
+            if(memo2[n - i - 1] === undefined) {
+                memo2[n - i - 1] = stream_ref(s2, n - i - 1);
+            }
+            p1 = memo1[i];
+            p2 = memo2[n - i - 1];
+            sum = sum + (p1 * p2);
+        }
+        return sum;
+    }
+    function generate_series(n) {
+        return pair(get_power_term(n), () => generate_series(n + 1));
+    }
+    return generate_series(1);
+}
+
+function eval_polynomial(series, x, n) {
+    let sum = 0;
+    function traverse(s, i) {
+        if(i <= n) {
+            const p = head(s);
+            sum = sum + (p * math_pow(x, i));
+            traverse(stream_tail(s), i + 1);
+        }
+    }
+    traverse(series, 0);
+    return sum;
+}
+
 function stream_interweave(s1, s2) {
     function weave(s1, s2, p) {
         if(p === 1) {
