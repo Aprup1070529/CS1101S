@@ -47,3 +47,29 @@ const zeros = add_series(alt_ones, stream_tail(alt_ones));
 const S1 = fun_to_series(x => 1);
 
 const S2 = fun_to_series(x => x + 1);
+
+function stream_interweave(s1, s2) {
+    function weave(s1, s2, p) {
+        if(p === 1) {
+            p = 2;
+            return pair(head(s1), () => weave(stream_tail(s1), s2, 2));
+        }
+        else {
+            const temp = s2();
+            p = 1;
+            return pair(head(temp), () => weave(s1, tail(temp), 1));
+        }
+    }
+    return weave(s1, s2, 1);
+}
+
+function stream_pairs3(s) {
+    return is_null(s)
+        ? null
+        : stream_interweave(
+            stream_map(sn => pair(head(s), sn), stream_tail(s)),
+            () => stream_pairs3(stream_tail(s)));
+}
+
+const integers = integers_from(1);
+const s3 = stream_pairs3(integers);
