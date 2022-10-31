@@ -35,7 +35,7 @@ function is_dna_strand(xs) {
 ////////////////////////////////////////////////////////////
 
 function combine(xss) {
-    
+    return accumulate(append, null, xss);
 }
 
 
@@ -45,9 +45,7 @@ function combine(xss) {
 ////////////////////////////////////////////////////////////
 
 function oxoguanine_repair(xs) {
-
-    // WRITE HERE.
-
+    return map(x => x === "8" ? "G" : x, xs);
 }
 
 
@@ -57,7 +55,7 @@ function oxoguanine_repair(xs) {
 ////////////////////////////////////////////////////////////
 
 function find_gene_start(xs) {
-
+    
     // WRITE HERE.
 
 }
