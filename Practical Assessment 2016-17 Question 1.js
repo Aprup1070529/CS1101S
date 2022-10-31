@@ -55,9 +55,13 @@ function oxoguanine_repair(xs) {
 ////////////////////////////////////////////////////////////
 
 function find_gene_start(xs) {
-    
-    // WRITE HERE.
-
+    return length(xs) < 3
+        ? null 
+        : list_ref(xs, 0) === "A" 
+            && list_ref(xs, 1) === "T" 
+            && list_ref(xs, 2) === "G"
+        ? list(tail(tail(tail(xs))))
+        : find_gene_start(tail(xs));
 }
 
 
@@ -67,9 +71,9 @@ function find_gene_start(xs) {
 ////////////////////////////////////////////////////////////
 
 function find_gene_end(xs) {
-
+    
     // WRITE HERE.
-
+    
 }
 
 
@@ -553,3 +557,5 @@ assert(
     "Q1G-P03",
     ['all_genes']
 );
+
+find_gene_start(list("A", "T", "A", "G", "T", "A", "T", "G"));
