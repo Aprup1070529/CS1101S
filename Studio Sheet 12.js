@@ -71,8 +71,10 @@ function eval_block(component, env) {
                                              env));
 }
 
+const unassigned = pair("unassigned", null);
+
 function list_of_unassigned(symbols) {
-    return map(symbol => "*unassigned*", symbols);
+    return map(symbol => unassigned, symbols);
 }
 
 function eval_declaration(component, env) {
@@ -80,7 +82,7 @@ function eval_declaration(component, env) {
         declaration_symbol(component), 
         evaluate(declaration_value_expression(component), env),
         env);
-  return undefined;
+    return undefined;
 }
 
 function list_of_values(exprs, env) {
@@ -326,7 +328,10 @@ function lookup_symbol_value(symbol, env) {
             return is_null(symbols)
                    ? env_loop(enclosing_environment(env))
                    : symbol === head(symbols)
-                   ? head(vals)
+                   ? (head(vals) === unassigned
+                        ? error("Variable " + "'" + head(symbols) + "'"+  
+                                                        " is not assigned")
+                        : head(vals))
                    : scan(tail(symbols), tail(vals));
         }
         if (env === the_empty_environment) {
@@ -456,9 +461,8 @@ function parse_and_evaluate(program) {
 
 // test cases
 parse_and_evaluate(`  
-    const x = f(8);
-    function f(y) {		
-       y + 34;
-    }
-    x;
+    const x = y;
+    const y = 42;
+    const z = "***" + x + "***";
+    z;
 `);
