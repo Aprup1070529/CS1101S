@@ -328,10 +328,10 @@ function lookup_symbol_value(symbol, env) {
             return is_null(symbols)
                    ? env_loop(enclosing_environment(env))
                    : symbol === head(symbols)
-                   ? (head(vals) === unassigned
+                   ? head(vals) === unassigned
                         ? error("Variable " + "'" + head(symbols) + "'"+  
-                                                        " is not assigned")
-                        : head(vals))
+                                                    " is not assigned")
+                        : head(vals)
                    : scan(tail(symbols), tail(vals));
         }
         if (env === the_empty_environment) {
