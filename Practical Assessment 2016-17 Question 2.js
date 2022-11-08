@@ -11,9 +11,8 @@
 ////////////////////////////////////////////////////////////
 
 function all_different(nums) {
-
-    // WRITE HERE.
-
+    return !accumulate((x, y) => x || y, false, 
+                        map(x => !is_null(member(x, remove(x, nums))), nums));
 }
 
 
