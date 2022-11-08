@@ -22,9 +22,13 @@ function all_different(nums) {
 ////////////////////////////////////////////////////////////
 
 function is_valid_toto_set(nums, n, min, max) {
-
-    // WRITE HERE.
-
+    return is_null(nums) && n === 0
+        ? true
+        : is_null(nums) || n === 0 
+            || head(nums) < min || head(nums) > max 
+            || !all_different(nums)
+        ? false
+        : is_valid_toto_set(tail(nums), n - 1, min, max);
 }
 
 
@@ -34,9 +38,8 @@ function is_valid_toto_set(nums, n, min, max) {
 ////////////////////////////////////////////////////////////
 
 function num_of_matches(numsA, numsB) {
-
-    // WRITE HERE.
-
+    return accumulate((x, y) => x ? y + 1 : y, 0, 
+                        map(ele => !is_null(member(ele, numsB)), numsA));
 }
 
 
